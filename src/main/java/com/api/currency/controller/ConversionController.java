@@ -1,11 +1,13 @@
-package com.api.currency;
+package com.api.currency.controller;
 
-import java.util.HashMap;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import com.api.currency.exception.CurrencyNotFound;
+import com.api.currency.model.Convertor;
 
 @RestController
 public class ConversionController {
@@ -22,8 +24,14 @@ public class ConversionController {
 	@GetMapping("/convert")
 	public Double convert(@RequestParam(value = "sourceCurrency") String source, 
 			@RequestParam(value = "amount", defaultValue = "World") Double amount,
-			@RequestParam(value = "targetCurrency", defaultValue = "World") String target) {
-	return conversionRates(source);
+			@RequestParam(value = "targetCurrency") String target) throws CurrencyNotFound {
+		
+		Double srcRate= conversionRates(source);
+		Double targetRate= conversionRates(target);
+		if (srcRate == null || targetRate == null)
+			throw new CurrencyNotFound("currency not found");
+		Double srcToTargetRate=targetRate/srcRate;
+	return srcToTargetRate*amount;
 	}
 	
 	public Double conversionRates(String currency)

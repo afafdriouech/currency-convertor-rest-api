@@ -1,4 +1,4 @@
-package com.api.currency;
+package com.api.currency.model;
 
 import java.util.HashMap;
 
