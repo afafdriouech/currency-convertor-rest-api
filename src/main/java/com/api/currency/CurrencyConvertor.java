@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SpringBootApplication
-//@RestController
 public class CurrencyConvertor {
 	
 	
@@ -23,11 +22,6 @@ public class CurrencyConvertor {
 	public static void main(String[] args) {
 		SpringApplication.run(CurrencyConvertor.class, args);
 	}
-	
-	/*@GetMapping("/helloPage")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-	return String.format("Hello %s!", name);
-	}*/
 	
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {

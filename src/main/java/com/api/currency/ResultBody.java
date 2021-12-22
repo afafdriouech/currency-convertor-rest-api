@@ -2,13 +2,21 @@ package com.api.currency;
 
 public class ResultBody {
 
-	private String success;
+	private Boolean success;
 	private Query query;
 	private Double result;
-	public String getSuccess() {
+	
+	
+	public ResultBody(Boolean success, Query query, Double result) {
+		super();
+		this.success = success;
+		this.query = query;
+		this.result = result;
+	}
+	public Boolean getSuccess() {
 		return success;
 	}
-	public void setSuccess(String success) {
+	public void setSuccess(Boolean success) {
 		this.success = success;
 	}
 	public Query getQuery() {
@@ -25,7 +33,7 @@ public class ResultBody {
 	}
 	@Override
 	public String toString() {
-		return "ResultBody [success=" + success + ", query=" + query + ", result=" + result + "]";
+		return "ResultBody [success=" + success + ",\n query=" + query + ",\n result=" + result + "]";
 	}
 	
 	
