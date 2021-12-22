@@ -1,6 +1,12 @@
 package com.api.currency.controller;
 
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.lang.NonNull;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,22 +16,15 @@ import com.api.currency.exception.CurrencyNotFound;
 import com.api.currency.model.Convertor;
 
 @RestController
+@Validated
 public class ConversionController {
 
 	private String accessKey="178bd3ec1a0ebed7404598d8faffd694";
 	
-	/*@GetMapping("/convert")
-	public ResultBody convert(@RequestParam(value = "sourceCurrency", defaultValue = "World") String source, 
-			@RequestParam(value = "amount", defaultValue = "World") Double amount,
-			@RequestParam(value = "targetCurrency", defaultValue = "World") String target) {
-	return new ResultBody(true,new Query(source,target,amount),123.4);
-	}*/
-	
 	@GetMapping("/convert")
-	public Double convert(@RequestParam(value = "sourceCurrency") String source, 
-			@RequestParam(value = "amount", defaultValue = "World") Double amount,
-			@RequestParam(value = "targetCurrency") String target) throws CurrencyNotFound {
-		
+	public Double convert(@Valid @NotBlank @RequestParam(value = "sourceCurrency") String source, 
+			@Valid @NotNull @RequestParam(value = "amount") Double amount,
+			@Valid @NotBlank @RequestParam(value = "targetCurrency") String target) throws CurrencyNotFound{
 		Double srcRate= conversionRates(source);
 		Double targetRate= conversionRates(target);
 		if (srcRate == null || targetRate == null)
