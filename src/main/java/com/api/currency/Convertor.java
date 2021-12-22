@@ -32,7 +32,10 @@ public class Convertor {
 		this.rates = rates;
 	}
 
-
+	public Double getRate(String key)
+	{
+		return this.rates.get(key);
+	}
 
 	@Override
 	public String toString() {

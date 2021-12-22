@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,14 +19,14 @@ import org.slf4j.LoggerFactory;
 public class CurrencyConvertor {
 	
 	
-	private static final Logger log = LoggerFactory.getLogger(CurrencyConvertor.class);
+	//private static final Logger log = LoggerFactory.getLogger(CurrencyConvertor.class);
 	private static final String accessKey="178bd3ec1a0ebed7404598d8faffd694";
 
 	public static void main(String[] args) {
 		SpringApplication.run(CurrencyConvertor.class, args);
 	}
 	
-	@Bean
+	/*@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
 	}
@@ -33,8 +36,8 @@ public class CurrencyConvertor {
 		return args -> {
 			Convertor rates = restTemplate.getForObject(
 					"http://api.exchangeratesapi.io/v1/latest?access_key="+CurrencyConvertor.accessKey+"&format=1", Convertor.class);
-			log.info(rates.toString());
+			//log.info(rates.toString());
 		};
-	}
+	}*/
 
 }
