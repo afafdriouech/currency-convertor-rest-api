@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.api.currency.exception.CurrencyNotFound;
 import com.api.currency.model.Convertor;
-import com.api.currency.model.ResultBody;
 
 @RestController
 @Validated
@@ -23,7 +22,7 @@ public class ConversionController {
 	private String accessKey="178bd3ec1a0ebed7404598d8faffd694";
 	
 	@GetMapping("/convert")
-	public ResultBody convert(@Valid @NotBlank @RequestParam(value = "sourceCurrency") String source, 
+	public Double convert(@Valid @NotBlank @RequestParam(value = "sourceCurrency") String source, 
 			@Valid @NotNull @RequestParam(value = "amount") Double amount,
 			@Valid @NotBlank @RequestParam(value = "targetCurrency") String target) throws CurrencyNotFound{
 		Double srcRate= conversionRates(source);
@@ -31,8 +30,7 @@ public class ConversionController {
 		if (srcRate == null || targetRate == null)
 			throw new CurrencyNotFound("currency not found");
 		Double srcToTargetRate=targetRate/srcRate;
-	//return srcToTargetRate*amount;
-	return new ResultBody(true,null,srcToTargetRate*amount);
+	return srcToTargetRate*amount;
 	}
 	
 	public Double conversionRates(String currency)
